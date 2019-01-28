@@ -8,24 +8,46 @@
     <link rel="stylesheet" href="assets/css/style.min.css">
 </head>
 <body>
-    <h4>MAC OS X Terminal</h4>
-    <div class="container"> 
-        <div class="topbar">
-            <div class="red"></div>
-            <div class="yellow"></div>
-            <div class="green"></div>
-            <div class="title">root@10.0.0.1</div>
+    <div id="termulator">
+        <h4>MAC OS X Terminal</h4>
+        <div class="container" v-if="showModal">       
+            <div class="topbar">
+                <div class="red"></div>
+                <div class="yellow"></div>
+                <div class="green"></div>
+            <div class="title">{{user}}@{{pc}}</div>
+            </div>
+            <div class="term-body" id="term-body" v-on:click="focusElement">
+                <div class="input">
+                    <span>{{user}}@{{pc}}:~$</span>
+                    <input type="text" id="caret" v-model="content" v-on:keyup.enter="showOutput">
+                </div>
+            </div>
         </div>
-        <div class="input">
-            <span>root@10.0.0.1:~$</span>
-            <input type="text">
+            
+        <div class="dialog" v-else>
+            <div class="overlay"></div>
+            <div class="modal">
+                <div class="modal-topbar">
+                    <div class="red"></div>
+                    <div class="yellow"></div>
+                    <div class="green"></div>
+                    <div class="title">Enter your name</div>
+                </div>
+                <div class="modal-body">
+                    <form onsubmit="return false" v-on:submit="bindValues">
+                        <input type="text" placeholder="Name" id="user" v-model="userInput">
+                        <input type="text" placeholder="PC name" id="pc" v-model="pcInput">
+                        <button v-on:click="bindValues" class="btn-mac">Go</button>
+                        <p>
+                            <small>Click enter to skip</small>
+                        </p>    
+                    </form>
+                </div>
+            </div>
         </div>
-    </div> 
-    <script>
-        document.querySelector('.input input').focus();
-        document.querySelector('.container').addEventListener('click', function(){
-            document.querySelector('.input input').focus();    
-        });
-    </script>
+    </div>
+    <script src="http://localhost/cdn/libraries/vuejs/vue.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
