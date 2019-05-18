@@ -15,7 +15,7 @@ var app = new Vue({
         },
         bindValues(){
             if(this.userInput == '' && this.pcInput == ''){
-                this.user = 'ilyes';
+                this.user = 'celyes';
                 this.pc = 'jarvis'
 
             }else{
